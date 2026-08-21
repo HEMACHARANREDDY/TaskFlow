@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+Allow: /auth
+Allow: /dashboard
+Allow: /tasks
+Allow: /analytics
+Allow: /settings
+
+# Sitemaps and LLM manifest
+Sitemap: http://localhost:8080/sitemap.xml
+# LLMs and generative engine indexing
+# See https://llmstxt.org/

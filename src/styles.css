@@ -1,0 +1,406 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ink: var(--ink);
+  --color-surface: var(--surface);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --shadow-soft: var(--elev-soft);
+  --shadow-lift: var(--elev-lift);
+}
+
+:root {
+  --radius: 1rem;
+  --background: oklch(0.985 0 0);
+  --surface: oklch(0.945 0 0);
+  --foreground: oklch(0.18 0 0);
+  --ink: oklch(0.18 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.18 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.18 0 0);
+  --primary: oklch(0.82 0.18 90);
+  --primary-foreground: oklch(0.14 0 0);
+  --primary-glow: oklch(0.9 0.16 90);
+  --secondary: oklch(0.945 0 0);
+  --secondary-foreground: oklch(0.18 0 0);
+  --muted: oklch(0.945 0 0);
+  --muted-foreground: oklch(0.55 0 0);
+  --accent: oklch(0.97 0.03 90);
+  --accent-foreground: oklch(0.2 0.05 90);
+  --destructive: oklch(0.58 0.2 25);
+  --destructive-foreground: oklch(0.99 0 0);
+  --success: oklch(0.62 0.15 155);
+  --warning: oklch(0.72 0.15 70);
+  --border: oklch(0.88 0 0);
+  --input: oklch(0.88 0 0);
+  --ring: oklch(0.82 0.18 90);
+  --grid-line: oklch(0.92 0 0);
+  --chart-1: oklch(0.82 0.18 90);
+  --chart-2: oklch(0.4 0 0);
+  --chart-3: oklch(0.92 0.05 90);
+  --chart-4: oklch(0.72 0.15 70);
+  --chart-5: oklch(0.75 0 0);
+  --glass-bg: color-mix(in oklab, oklch(1 0 0) 72%, transparent);
+  --glass-border: color-mix(in oklab, oklch(0.82 0.18 90) 12%, oklch(0.88 0 0));
+  --gradient-primary: linear-gradient(135deg, var(--primary), var(--primary-glow));
+  --gradient-veil:
+    radial-gradient(
+      60% 60% at 12% 0%,
+      color-mix(in oklab, var(--primary) 14%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      50% 50% at 92% 8%,
+      color-mix(in oklab, var(--primary-glow) 18%, transparent),
+      transparent 70%
+    );
+  --elev-soft: 0 1px 2px oklch(0.18 0 0 / 0.04), 0 8px 24px -12px oklch(0.18 0 0 / 0.14);
+  --elev-lift: 0 2px 6px oklch(0.18 0 0 / 0.05), 0 24px 48px -24px oklch(0.82 0.18 90 / 0.35);
+}
+
+.dark {
+  --background: oklch(0.16 0 0);
+  --surface: oklch(0.22 0 0);
+  --foreground: oklch(0.96 0 0);
+  --ink: oklch(0.96 0 0);
+  --card: oklch(0.22 0 0);
+  --card-foreground: oklch(0.96 0 0);
+  --popover: oklch(0.22 0 0);
+  --popover-foreground: oklch(0.96 0 0);
+  --primary: oklch(0.84 0.18 90);
+  --primary-foreground: oklch(0.14 0 0);
+  --primary-glow: oklch(0.9 0.16 90);
+  --secondary: oklch(0.26 0 0);
+  --secondary-foreground: oklch(0.96 0 0);
+  --muted: oklch(0.26 0 0);
+  --muted-foreground: oklch(0.7 0 0);
+  --accent: oklch(0.24 0.04 90);
+  --accent-foreground: oklch(0.9 0.05 90);
+  --destructive: oklch(0.66 0.18 25);
+  --destructive-foreground: oklch(0.99 0 0);
+  --success: oklch(0.72 0.14 155);
+  --warning: oklch(0.78 0.13 70);
+  --border: oklch(0.3 0 0);
+  --input: oklch(0.32 0 0);
+  --ring: oklch(0.84 0.18 90);
+  --grid-line: oklch(0.26 0 0);
+  --chart-1: oklch(0.84 0.18 90);
+  --chart-2: oklch(0.68 0 0);
+  --chart-3: oklch(0.45 0.05 90);
+  --chart-4: oklch(0.78 0.13 70);
+  --chart-5: oklch(0.4 0 0);
+  --glass-bg: color-mix(in oklab, oklch(0.24 0 0) 72%, transparent);
+  --glass-border: color-mix(in oklab, oklch(0.84 0.18 90) 22%, oklch(0.3 0 0));
+  --elev-soft: 0 1px 2px oklch(0 0 0 / 0.4), 0 8px 24px -12px oklch(0 0 0 / 0.55);
+  --elev-lift: 0 2px 6px oklch(0 0 0 / 0.45), 0 24px 48px -24px oklch(0.84 0.18 90 / 0.4);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    letter-spacing: -0.03em;
+  }
+}
+
+@utility grid-bg {
+  background-image:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 72px 72px;
+}
+
+@utility grid-bg-fade {
+  background-image:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse 90% 70% at 50% 20%, #000 30%, transparent 100%);
+}
+
+@utility sketch {
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@utility eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.03em;
+  }
+}
+
+@utility glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--elev-soft);
+}
+
+@utility bento-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-2xl);
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--elev-soft);
+  transition:
+    box-shadow 240ms ease,
+    transform 240ms ease;
+  &:hover {
+    box-shadow: var(--elev-lift);
+    transform: translateY(-2px);
+  }
+}
+
+@utility veil {
+  background-image: var(--gradient-veil);
+}
+
+@utility text-gradient {
+  background-image: var(--gradient-primary);
+  background-clip: text;
+  color: transparent;
+}
+
+@keyframes marquee-x {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@utility marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-x 32s linear infinite;
+}
+
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@utility float-slow {
+  animation: float-y 7s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track,
+  .float-slow {
+    animation: none;
+  }
+}
+
+/* ---------- Hand-drawn / sketched interface ---------- */
+
+:root {
+  --ink-line: oklch(0.24 0 0);
+  --paper: oklch(0.985 0.008 95);
+  --sketch-radius: 255px 12px 225px 14px / 14px 225px 12px 255px;
+  --sketch-radius-alt: 14px 240px 16px 235px / 235px 16px 250px 14px;
+  --sketch-shadow: 3px 3px 0 var(--ink-line);
+  --border: oklch(0.24 0 0);
+  --input: oklch(0.24 0 0);
+}
+
+.dark {
+  --ink-line: oklch(0.92 0 0);
+  --paper: oklch(0.16 0 0);
+  --sketch-shadow: 3px 3px 0 var(--ink-line);
+  --border: oklch(0.72 0 0);
+  --input: oklch(0.72 0 0);
+}
+
+body {
+  background-color: var(--paper);
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      color-mix(in oklab, var(--ink-line) 4%, transparent) 0 1px,
+      transparent 1px 26px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      color-mix(in oklab, var(--ink-line) 3%, transparent) 0 1px,
+      transparent 1px 26px
+    );
+}
+
+@utility sketch-frame {
+  border: 2px solid var(--ink-line);
+  border-radius: var(--sketch-radius);
+  box-shadow: var(--sketch-shadow);
+  background: var(--color-card);
+}
+
+@utility sketch-frame-alt {
+  border: 2px solid var(--ink-line);
+  border-radius: var(--sketch-radius-alt);
+  box-shadow: var(--sketch-shadow);
+}
+
+@utility ink-underline {
+  background-image: linear-gradient(
+    to right,
+    color-mix(in oklab, var(--primary) 90%, transparent),
+    color-mix(in oklab, var(--primary) 40%, transparent)
+  );
+  background-repeat: no-repeat;
+  background-size: 100% 0.4em;
+  background-position: 0 88%;
+}
+
+@layer base {
+  /* buttons + inputs get the pen-drawn treatment */
+  button.border,
+  button[class*="bg-primary"],
+  button[class*="bg-secondary"],
+  button[class*="bg-destructive"],
+  input:not([type="checkbox"]):not([type="radio"]),
+  textarea,
+  select,
+  [role="combobox"] {
+    border-radius: var(--sketch-radius);
+    border-width: 2px;
+    border-style: solid;
+    border-color: var(--ink-line);
+    transition:
+      transform 140ms ease,
+      box-shadow 140ms ease;
+  }
+
+  button.border:not(:disabled):hover,
+  button[class*="bg-primary"]:not(:disabled):hover,
+  button[class*="bg-secondary"]:not(:disabled):hover {
+    transform: translate(-1px, -1px);
+  }
+
+  button.border:not(:disabled):active,
+  button[class*="bg-primary"]:not(:disabled):active,
+  button[class*="bg-secondary"]:not(:disabled):active {
+    transform: translate(1px, 1px);
+    box-shadow: none;
+  }
+
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    outline: none;
+    box-shadow: 3px 3px 0 var(--ink-line);
+  }
+
+  /* keep round things round */
+  button.rounded-full,
+  .rounded-full > button {
+    border-radius: 9999px;
+  }
+}
+
+/* cards, panels and skeleton blocks inherit the sketch outline */
+.bento-card,
+.glass-panel {
+  border: 2px solid var(--ink-line);
+  border-radius: var(--sketch-radius);
+  box-shadow: var(--sketch-shadow);
+}
+
+.bento-card:nth-child(even) {
+  border-radius: var(--sketch-radius-alt);
+}
+
+.bento-card:hover,
+.glass-panel:hover {
+  box-shadow: 5px 5px 0 var(--ink-line);
+  transform: translate(-1px, -1px);
+}
+
+/* app surfaces drawn with the same pen */
+.rounded-xl.border,
+.rounded-2xl.border,
+.rounded-xl.border-border,
+.rounded-2xl.border-border {
+  border-radius: var(--sketch-radius);
+  border-width: 2px;
+  border-color: var(--ink-line);
+  box-shadow: var(--sketch-shadow);
+}
+
+.rounded-xl.border:nth-of-type(even),
+.rounded-2xl.border:nth-of-type(even) {
+  border-radius: var(--sketch-radius-alt);
+}
+
+.rounded-xl.border-dashed,
+.rounded-2xl.border-dashed {
+  border-style: dashed;
+  box-shadow: none;
+}

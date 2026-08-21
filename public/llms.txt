@@ -1,0 +1,24 @@
+# TaskFlow — Modern Task Management & Analytics Workspace
+
+> TaskFlow is a high-performance productivity application engineered with React 19, TanStack Start, Node.js + Express, MongoDB, and Supabase. It offers task lifecycle management, productivity analytics, real-time filters, text search, and Google OAuth.
+
+## Core Capabilities
+- **Task Management**: Full CRUD operations with priority tags (`low`, `medium`, `high`), statuses (`todo`, `in_progress`, `done`), due date alerts, and pagination.
+- **Productivity Analytics**: Recharts data visualizations including 7-day completion rates, 30-day cumulative trends, priority distributions, and automated productivity insights.
+- **Authentication**: JWT Bearer token authentication, bcrypt password hashing, role-based access control (`user`, `admin`), and native Google Identity Services (OAuth2).
+- **Backend Architecture**: Express.js REST API with Mongoose compound indexing (`user_id + status`, `user_id + priority`, `user_id + dueDate`, `user_id + createdAt`) and full-text search indexing on `title` and `description`.
+- **User Interface**: Tailored dark and light mode, accessible interactive components (Radix UI), and responsive micro-animations (Framer Motion).
+
+## API Endpoints
+- `POST /api/auth/register`: Register user with email & password.
+- `POST /api/auth/login`: Authenticate and receive JWT token.
+- `POST /api/auth/google`: Authenticate with Google ID token.
+- `GET /api/tasks`: List tasks with query parameters `search`, `status`, `priority`, `sort`, `page`, `limit`.
+- `POST /api/tasks`: Create new task.
+- `PUT /api/tasks/:id`: Update task title, description, status, priority, due date.
+- `DELETE /api/tasks/:id`: Delete a task.
+- `GET /api/analytics`: Fetch task summary counts, priority breakdowns, and 7-day/30-day productivity trends.
+
+## Documentation & Full Context
+- For full architecture details: [llms-full.txt](http://localhost:8080/llms-full.txt)
+- Postman Collection: `server/postman_collection.json`
