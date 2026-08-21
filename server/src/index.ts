@@ -3,7 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import path from "path";
 import fs from "fs";
-import { fileURLToPath } from "url";
+import { fileURLToPath, pathToFileURL } from "url";
 import { connectDB } from "./config/db.js";
 import authRoutes from "./routes/authRoutes.js";
 import taskRoutes from "./routes/taskRoutes.js";
@@ -56,15 +56,59 @@ app.use("/api/analytics", analyticsRoutes);
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const clientDistPath = path.resolve(__dirname, "../../dist/client");
+const serverDistPath = path.resolve(__dirname, "../../dist/server/server.js");
 
 if (fs.existsSync(clientDistPath)) {
   app.use(express.static(clientDistPath));
-  app.use((req, res, next) => {
-    if (req.method === "GET" && !req.path.startsWith("/api")) {
-      return res.sendFile(path.join(clientDistPath, "index.html"));
+}
+
+if (fs.existsSync(serverDistPath)) {
+  try {
+    const ssrModule = (await import(pathToFileURL(serverDistPath).href)) as {
+      default?: { fetch: (req: Request, env?: unknown, ctx?: unknown) => Promise<Response> };
+    };
+    const ssrHandler = ssrModule.default;
+
+    if (ssrHandler && typeof ssrHandler.fetch === "function") {
+      app.use(async (req, res, next) => {
+        if (req.path.startsWith("/api")) {
+          return next();
+        }
+
+        try {
+          const proto = req.headers["x-forwarded-proto"] || req.protocol || "http";
+          const host = req.headers["x-forwarded-host"] || req.headers.host || "localhost";
+          const url = new URL(req.originalUrl || req.url, `${proto}://${host}`);
+
+          const headers = new Headers();
+          for (const [key, val] of Object.entries(req.headers)) {
+            if (val) {
+              headers.set(key, Array.isArray(val) ? val.join(", ") : val);
+            }
+          }
+
+          const webReq = new Request(url.toString(), {
+            method: req.method,
+            headers,
+          });
+
+          const webRes = await ssrHandler.fetch(webReq, {}, {});
+          res.status(webRes.status);
+          webRes.headers.forEach((value, headerKey) => {
+            res.setHeader(headerKey, value);
+          });
+
+          const text = await webRes.text();
+          return res.send(text);
+        } catch (ssrErr) {
+          console.error("[SSR Error]:", ssrErr);
+          next();
+        }
+      });
     }
-    next();
-  });
+  } catch (err) {
+    console.warn("[SSR] Could not load SSR module:", err);
+  }
 }
 
 // Error Handling Middleware
