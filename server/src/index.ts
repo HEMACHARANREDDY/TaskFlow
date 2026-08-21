@@ -94,10 +94,10 @@ if (fs.existsSync(serverDistPath)) {
 
           const webRes = await ssrHandler.fetch(webReq, {}, {});
           res.status(webRes.status);
-          webRes.headers.forEach((value, headerKey) => {
-            res.setHeader(headerKey, value);
-          });
-
+          const contentType = webRes.headers.get("content-type");
+          if (contentType) {
+            res.setHeader("content-type", contentType);
+          }
           const text = await webRes.text();
           return res.send(text);
         } catch (ssrErr) {
