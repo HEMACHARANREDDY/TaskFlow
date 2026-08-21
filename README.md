@@ -124,9 +124,40 @@ taskflow/
 
 ---
 
+## Deployment on Render
+
+This repository is pre-configured for automated deployment on [Render](https://render.com) using the included `render.yaml` blueprint.
+
+### Option 1: Blueprint Deployment (Recommended)
+
+1. Go to your [Render Dashboard](https://dashboard.render.com/) and click **New > Blueprint**.
+2. Connect your repository: `https://github.com/HEMACHARANREDDY/TaskFlow`.
+3. Render will detect `render.yaml` and configure the build and start commands automatically.
+4. Set your `MONGODB_URI` environment variable and click **Apply**.
+
+### Option 2: Manual Web Service Setup
+
+1. In Render, select **New > Web Service**.
+2. Connect your repository and configure:
+   - **Environment**: `Node`
+   - **Build Command**: `npm install && npm run build`
+   - **Start Command**: `npm run server`
+3. Add environment variables:
+   - `NODE_ENV`: `production`
+   - `MONGODB_URI`: `<your_mongodb_connection_string>`
+   - `JWT_SECRET`: `<your_secure_jwt_secret>`
+   - `GOOGLE_CLIENT_ID`: `<your_google_client_id>`
+   - `GOOGLE_CLIENT_SECRET`: `<your_google_client_secret>`
+4. Click **Deploy Web Service**.
+
+---
+
 ## API Documentation
 
 For the complete REST API specification, endpoint schemas, query parameters, and Postman import instructions, refer to [`server/README.md`](file:///c:/Users/Charan/Desktop/projetcs/Flow%20State/server/README.md).
 
 ---
 
+## License
+
+This project is licensed under the MIT License.
