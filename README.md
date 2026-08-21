@@ -130,6 +130,3 @@ For the complete REST API specification, endpoint schemas, query parameters, and
 
 ---
 
-## License
-
-This project is licensed under the MIT License.
