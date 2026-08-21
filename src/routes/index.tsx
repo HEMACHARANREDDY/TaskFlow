@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { motion, useInView, useScroll, useTransform } from "motion/react";
+import { motion, useInView } from "motion/react";
 import { ArrowRight, Moon, Sun } from "lucide-react";
 import { Logo } from "@/components/app-shell";
 import { Button } from "@/components/ui/button";
@@ -100,11 +100,6 @@ function Counter({ to, suffix }: { to: number; suffix: string }) {
 
 function Landing() {
   const { resolved, toggle } = useTheme();
-  const heroRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
-  const artY = useTransform(scrollYProgress, [0, 1], [0, 70]);
-  const artRotate = useTransform(scrollYProgress, [0, 1], [0, -2]);
-  const copyY = useTransform(scrollYProgress, [0, 1], [0, -30]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -146,18 +141,13 @@ function Landing() {
         </div>
       </header>
 
-      <section
-        id="product"
-        ref={heroRef}
-        className="relative overflow-hidden border-b border-border"
-      >
+      <section id="product" className="relative overflow-hidden border-b border-border">
         <div className="absolute inset-0 veil" />
         <div className="absolute inset-0 grid-bg-fade opacity-40" />
         <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-6 py-20 lg:grid-cols-2 lg:py-28">
           <motion.div
-            style={{ y: copyY }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
             <p className="eyebrow inline-flex rounded-full border border-border bg-card/70 px-3 py-1 text-muted-foreground backdrop-blur">
@@ -183,7 +173,6 @@ function Landing() {
           </motion.div>
 
           <motion.div
-            style={{ y: artY, rotate: artRotate }}
             initial={{ opacity: 0, scale: 0.97 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.1 }}
