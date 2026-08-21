@@ -140,7 +140,7 @@ This repository is pre-configured for automated deployment on [Render](https://r
 1. In Render, select **New > Web Service**.
 2. Connect your repository and configure:
    - **Environment**: `Node`
-   - **Build Command**: `npm install && npm run build`
+   - **Build Command**: `npm install --include=dev && npm run build`
    - **Start Command**: `npm run server`
 3. Add environment variables:
    - `NODE_ENV`: `production`
